@@ -2,6 +2,8 @@
 
 {
   imports = [
+  ../shared/common/hyprland.nix
+
   ../shared/apps/spotify.nix
   ../shared/apps/vesktop.nix
   ../shared/apps/alsa-tools.nix

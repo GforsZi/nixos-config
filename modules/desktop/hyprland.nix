@@ -1,42 +1,19 @@
 { pkgs, ... }:
-
 {
   programs.hyprland = {
-      enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
-    mako
-    libnotify
-    awww
-    rofi
-    wireplumber
-    pavucontrol
-    brightnessctl
-    wlsunset
-    grim
-    slurp
-    wl-clipboard
-    calc
-    unzip
-    thunar
-    thunar-archive-plugin
-    papirus-icon-theme
-    lxappearance
-    bibata-cursors
-    wlogout
-    sddm-astronaut
     polkit_gnome
+    sddm-astronaut
   ];
 
   xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   services.displayManager.sddm = {
@@ -53,11 +30,10 @@
       kdePackages.qtmultimedia
       kdePackages.qtsvg
       kdePackages.qt5compat
-      ];
+    ];
   };
 
   security.pam.services.hyprlock = {};
-  programs.hyprlock.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -67,11 +43,9 @@
   services.logind = {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "lock";
-    settings = {
-      Login = {
-        IdleAction = "lock";
-        IdleActionSec = "5min";
-      };
+    settings.Login = {
+      IdleAction = "lock";
+      IdleActionSec = "5min";
     };
   };
 
