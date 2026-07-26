@@ -9,6 +9,12 @@
         User git
         IdentityFile ~/.ssh/id_ed25519_github
         IdentitiesOnly yes
+
+      Host gitlab.com
+        HostName gitlab.com
+        User git
+        IdentityFile ~/.ssh/id_ed25519_gitlab
+        IdentitiesOnly yes
     '';
   };
 }

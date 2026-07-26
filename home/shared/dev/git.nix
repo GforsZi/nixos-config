@@ -3,11 +3,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "GforsZi";
-    userEmail = "givaldigumelarsetiawan@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "GforsZi";
+      user.email = "givaldigumelarsetiawan@gmail.com";
       init.defaultBranch = "main";
-      pull.rebase = false;
     };
   };
 }

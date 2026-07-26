@@ -41,11 +41,13 @@
   ];
 
   services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "lock";
-    settings.Login = {
-      IdleAction = "lock";
-      IdleActionSec = "5min";
+    settings = {
+      Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "lock";
+        IdleAction = "lock";
+        IdleActionSec = "5min";
+      };
     };
   };
 

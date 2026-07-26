@@ -18,11 +18,11 @@
 
   ../shared/terminal/kitty.nix
   
-  ../shared/cli_tools/opencode.nix
-  ../shared/cli_tools/yazi.nix
-  ../shared/cli_tools/ffmpeg.nix
-  ../shared/cli_tools/ngrok.nix
-  ../shared/cli_tools/posting.nix
+  ../shared/cli-tools/opencode.nix
+  ../shared/cli-tools/yazi.nix
+  ../shared/cli-tools/ffmpeg.nix
+  ../shared/cli-tools/ngrok.nix
+  ../shared/cli-tools/posting.nix
 
   ../shared/dev/direnv.nix
   ../shared/dev/gcc.nix
