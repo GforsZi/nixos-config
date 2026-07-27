@@ -1,10 +1,10 @@
-{ ... }:
+{ config, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.resumeDevice = "/dev/disk/by-uuid/9d88bb68-6eed-481b-acc5-a204b3bcaecc";
-  boot.kernelParams = [ "resume=UUID=9d88bb68-6eed-481b-acc5-a204b3bcaecc" ];
+  boot.resumeDevice = (builtins.head config.swapDevices).device;
+  boot.kernelParams = [ "resume=${(builtins.head config.swapDevices).device}" ];
 
   boot.kernel.sysctl = {
     "vm.swappiness" = 100;

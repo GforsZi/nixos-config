@@ -13,7 +13,7 @@ Updates both NixOS system config and home-manager (user `gfors`) in one command.
 ```
 nixos-config/
 ├── AGENTS.md                              # Panduan konfigurasi & catatan penting
-├── flake.nix                              # Entrypoint: nixpkgs 26.05 + home-manager + spicetify-nix
+├── flake.nix                              # Entrypoint: nixpkgs 26.05 + nixpkgs-unstable + home-manager + spicetify-nix
 ├── flake.lock                             # Lockfile dependencies
 ├── .gitmodules                            # (kosong)
 │
@@ -35,7 +35,7 @@ nixos-config/
 │   │   └── intel-graphics.nix             #   Intel GPU (media-driver + vpl-gpu-rt)
 │   │
 │   ├── desktop/
-│   │   ├── hyprland.nix                   #   Hyprland (diimpor — aktif)
+│   │   ├── hyprland.nix                   #   Hyprland system (SDDM, portal, logind) — user config di home-manager
 │   │   └── kde-plasma.nix                 #   KDE Plasma 6 (ada tapi belum diimpor)
 │   │
 │   ├── services/
@@ -70,10 +70,13 @@ nixos-config/
                 │   └── scripts/
                 │       └── tmux-autostart.sh
                 │
+                ├── common/
+                │   └── hyprland.nix        #   Hyprland user config (dotfiles symlink, waybar, rofi, mako)
+                │
                 ├── terminal/
                 │   └── kitty.nix          #   Kitty terminal
                 │
-                ├── cli_tools/
+                ├── cli-tools/
                 │   ├── opencode.nix       #   opencode AI CLI
                 │   ├── yazi.nix           #   Yazi file manager
                 │   ├── ffmpeg.nix         #   FFmpeg
@@ -97,15 +100,15 @@ nixos-config/
 
 | Layer | Path | Deskripsi |
 |---|---|---|
-| **Flake** | `flake.nix` | Inputs (nixpkgs, home-manager, spicetify-nix) → `nixosConfigurations.tbook` |
+| **Flake** | `flake.nix` | Inputs (nixpkgs, nixpkgs-unstable, home-manager, spicetify-nix) → `nixosConfigurations.tbook` |
 | **System (NixOS)** | `hosts/tbook/` → imports `modules/*` | Boot, network, hardware, desktop, services |
-| **User (home-manager)** | `home/profiles/tbook.nix` → imports `home/shared/*` | Aplikasi, shell, dev tools, CLI, editor |
+| **User (home-manager)** | `home/profiles/tbook.nix` → imports `home/shared/*` | Aplikasi, shell, common(hyprland), dev tools, CLI, editor |
 
 ## Key details
 
 - **User**: `gfors` (shell: zsh, home: `/home/gfors`)
 - **Boot**: systemd-boot with EFI
-- **Desktop**: Hyprland (KDE Plasma 6 module tersedia tapi tidak aktif)
+- **Desktop**: Hyprland system via SDDM (Wayland); KDE Plasma 6 module tersedia tapi tidak aktif
 - **Audio**: PipeWire (replaces pulseaudio)
 - **GPU**: Intel with `intel-media-driver` + `vpl-gpu-rt`
 - **Firewall**: enabled, ports 1714-1764 (UDP/TCP) open for KDE Connect
@@ -119,6 +122,7 @@ nixos-config/
 - `spicetify-nix` is a flake input and passed to home-manager via `extraSpecialArgs`, but **not used** in any home module yet
 - `home/profiles/tbook.nix` is the home-manager entrypoint (not `home/default.nix` — file itu tidak ada)
 - `modules/desktop/kde-plasma.nix` exists but is **not imported** in `hosts/tbook/default.nix` (Hyprland is active instead)
+- `home/shared/common/hyprland.nix` holds Hyprland user config (dotfiles symlinks, waybar, rofi, mako, etc.) — system-level Hyprland config (SDDM, portal, logind) stays at `modules/desktop/hyprland.nix`
 - `home/shared/apps/vlc.nix` exists but is **not imported** in `tbook.nix`
 - Zsh config sources `~/.p10k.zsh` from an external `dotfiles` repo (`${config.home.homeDirectory}/dotfiles/zsh/.p10k.zsh`)
 - SSH agent auto-starts; GitHub identity uses `~/.ssh/id_ed25519_github` with `IdentitiesOnly yes`
