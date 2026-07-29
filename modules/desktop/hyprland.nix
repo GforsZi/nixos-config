@@ -9,6 +9,8 @@
   environment.systemPackages = with pkgs; [
     polkit_gnome
     sddm-astronaut
+    usbutils
+    lsof
   ];
 
   xdg.portal = {

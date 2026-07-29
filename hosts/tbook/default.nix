@@ -12,13 +12,16 @@
       ../../modules/core/boot.nix
       ../../modules/core/nix-settings.nix
       ../../modules/core/networking.nix
+      ../../modules/core/nix-ld.nix
       ../../modules/core/users.nix
+
       ../../modules/hardware/audio.nix
       ../../modules/hardware/intel-graphics.nix
       ../../modules/hardware/bluetooth.nix
       ../../modules/hardware/memory.nix
+
       ../../modules/desktop/hyprland.nix
-      ../../modules/common/packages.nix
+
       ../../modules/services/ssh.nix
       ../../modules/services/docker.nix
       ../../modules/services/mysql.nix

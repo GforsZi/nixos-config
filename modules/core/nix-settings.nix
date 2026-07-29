@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -16,8 +16,12 @@
     ];
   };
 
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+  nix.optimise.automatic = true;
 
-
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 7d";
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 5d";
+  };
 }

@@ -17,7 +17,13 @@
     slurp
     wl-clipboard
     calc
+    wget
+    curl
+    stow
+    fastfetch
+    btop
     unzip
+    p7zip-rar
     thunar
     thunar-archive-plugin
     papirus-icon-theme
