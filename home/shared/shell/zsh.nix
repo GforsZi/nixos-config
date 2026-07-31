@@ -20,6 +20,7 @@
     ];
 
     initContent = ''
+      export PATH="$HOME/.config/composer/vendor/bin:$PATH"
       source ~/.zsh-custom/tmux-autostart.sh
       export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
