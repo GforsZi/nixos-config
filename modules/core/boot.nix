@@ -1,10 +1,11 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.resumeDevice = (builtins.head config.swapDevices).device;
-  boot.kernelParams = [ "resume=${(builtins.head config.swapDevices).device}" ];
+
+  boot.resumeDevice = lib.mkIf (config.swapDevices != []) (lib.head config.swapDevices).device;
+  boot.kernelParams = lib.mkIf (config.swapDevices != []) [ "resume=${(lib.head config.swapDevices).device}" ];
 
   boot.kernel.sysctl = {
     "vm.swappiness" = 100;

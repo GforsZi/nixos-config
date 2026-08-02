@@ -24,29 +24,28 @@ nixos-config/
 │
 ├── modules/                               # System-level NixOS modules
 │   ├── core/
-│   │   ├── boot.nix                       #   systemd-boot + EFI
+│   │   ├── boot.nix                       #   systemd-boot + EFI + resume/hibernate
 │   │   ├── networking.nix                 #   Firewall, KDE Connect ports (1714-1764), NetworkManager
-│   │   ├── nix-settings.nix               #   Flakes, nix-command, GC auto (7d), unfree
+│   │   ├── nix-settings.nix               #   Flakes, nix-command, GC auto (5d), unfree
+│   │   ├── nix-ld.nix                     #   nix-ld — jalankan binary ELF non-NixOS
 │   │   └── users.nix                      #   User: gfors
 │   │
 │   ├── hardware/
 │   │   ├── audio.nix                      #   PipeWire (pengganti pulseaudio)
 │   │   ├── bluetooth.nix                  #   Bluetooth
-│   │   └── intel-graphics.nix             #   Intel GPU (media-driver + vpl-gpu-rt)
+│   │   ├── intel-graphics.nix             #   Intel GPU (media-driver + vpl-gpu-rt)
+│   │   └── memory.nix                     #   zramSwap (zstd, 50% RAM)
 │   │
 │   ├── desktop/
 │   │   ├── hyprland.nix                   #   Hyprland system (SDDM, portal, logind) — user config di home-manager
-│   │   └── kde-plasma.nix                 #   KDE Plasma 6 (ada tapi belum diimpor)
+│   │   └── kde-plasma.nix                 #   KDE Plasma 6 (dead code — tidak diimpor)
 │   │
-│   ├── services/
-│   │   ├── docker.nix                     #   Docker
-│   │   ├── flatpak.nix                    #   Flatpak
-│   │   ├── mysql.nix                      #   MySQL
-│   │   ├── power-profiles-daemon.nix      #   Power profiles
-│   │   └── ssh.nix                        #   SSH server & client
-│   │
-│   └── common/
-│       └── packages.nix                   #   Paket system-wide
+│   └── services/
+│       ├── docker.nix                     #   Docker (tidak auto-start)
+│       ├── flatpak.nix                    #   Flatpak
+│       ├── mysql.nix                      #   MySQL/MariaDB
+│       ├── power-profiles-daemon.nix      #   Power profiles
+│       └── ssh.nix                        #   SSH client config + agent
 │
 └── home/                                  # Home-manager (user: gfors)
     └── profiles/
@@ -54,7 +53,7 @@ nixos-config/
             │
             └── shared/                    # Logical directory — diimpor eksplisit via tbook.nix
                 ├── apps/
-                │   ├── spotify.nix        #   Spotify (via spicetify-nix — flake sudah di-pass, blm dipakai)
+                │   ├── spotify.nix        #   Spotify (via spicetify-nix — aktif)
                 │   ├── vesktop.nix        #   Vencord desktop
                 │   ├── alsa-tools.nix     #   ALSA tools
                 │   ├── browsers.nix       #   Firefox/Chromium dll
@@ -62,7 +61,7 @@ nixos-config/
                 │   ├── mpv.nix            #   MPV
                 │   ├── obs.nix            #   OBS Studio
                 │   ├── gimp.nix           #   GIMP
-                │   └── vlc.nix            #   VLC (belum diimpor)
+                │   └── vlc.nix            #   VLC (dead code — tidak diimpor)
                 │
                 ├── shell/
                 │   ├── zsh.nix            #   Zsh + p10k (dari dotfiles eksternal)
@@ -71,7 +70,7 @@ nixos-config/
                 │       └── tmux-autostart.sh
                 │
                 ├── common/
-                │   └── hyprland.nix        #   Hyprland user config (dotfiles symlink, waybar, rofi, mako)
+                │   └── hyprland.nix       #   Hyprland user config (dotfiles symlink, waybar, rofi, mako)
                 │
                 ├── terminal/
                 │   └── kitty.nix          #   Kitty terminal
@@ -112,18 +111,17 @@ nixos-config/
 - **Audio**: PipeWire (replaces pulseaudio)
 - **GPU**: Intel with `intel-media-driver` + `vpl-gpu-rt`
 - **Firewall**: enabled, ports 1714-1764 (UDP/TCP) open for KDE Connect
-- **Nix**: flakes + nix-command experimental features, auto GC (delete >7d), unfree packages allowed
+- **Nix**: flakes + nix-command experimental features, auto GC (delete >5d), unfree packages allowed
 - **Time zone**: Asia/Jakarta
 
 ## Quirks & gotchas
 
 - `hardware-configuration.nix` is regenerated on hardware changes — do not hand-edit
 - `home-manager` is used as a NixOS module (`useGlobalPkgs = true`, `useUserPackages = true`)
-- `spicetify-nix` is a flake input and passed to home-manager via `extraSpecialArgs`, but **not used** in any home module yet
+- `spicetify-nix` is a flake input, passed via `extraSpecialArgs`, dan sudah dipakai oleh `home/shared/apps/spotify.nix`
 - `home/profiles/tbook.nix` is the home-manager entrypoint (not `home/default.nix` — file itu tidak ada)
-- `modules/desktop/kde-plasma.nix` exists but is **not imported** in `hosts/tbook/default.nix` (Hyprland is active instead)
+- `modules/desktop/kde-plasma.nix` & `home/shared/apps/vlc.nix` adalah dead code — file ada tapi tidak diimpor di mana pun
 - `home/shared/common/hyprland.nix` holds Hyprland user config (dotfiles symlinks, waybar, rofi, mako, etc.) — system-level Hyprland config (SDDM, portal, logind) stays at `modules/desktop/hyprland.nix`
-- `home/shared/apps/vlc.nix` exists but is **not imported** in `tbook.nix`
 - Zsh config sources `~/.p10k.zsh` from an external `dotfiles` repo (`${config.home.homeDirectory}/dotfiles/zsh/.p10k.zsh`)
 - SSH agent auto-starts; GitHub identity uses `~/.ssh/id_ed25519_github` with `IdentitiesOnly yes`
 - `home.stateVersion` and `system.stateVersion` are both `"26.05"` — bump only on first install of a new release
