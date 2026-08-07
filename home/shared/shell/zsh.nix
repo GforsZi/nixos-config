@@ -23,6 +23,7 @@
       export PATH="$HOME/.config/composer/vendor/bin:$PATH"
       source ~/.zsh-custom/tmux-autostart.sh
       export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+      export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
