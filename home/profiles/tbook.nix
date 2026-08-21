@@ -12,6 +12,7 @@
   ../shared/apps/mpv.nix
   ../shared/apps/obs.nix
   ../shared/apps/gimp.nix
+  ../shared/apps/zoom-us.nix
 
   ../shared/shell/tmux.nix
   ../shared/shell/zsh.nix
