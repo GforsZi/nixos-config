@@ -5,6 +5,7 @@
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
+    openssl
     hypridle
     libnotify
     awww
@@ -24,8 +25,7 @@
     btop
     unzip
     p7zip-rar
-    thunar
-    thunar-archive-plugin
+    pcmanfm
     papirus-icon-theme
     lxappearance
     bibata-cursors

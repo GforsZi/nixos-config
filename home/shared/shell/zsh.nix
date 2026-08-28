@@ -21,6 +21,7 @@
 
     initContent = ''
       export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+      source ~/.zsh-custom/run-editor.sh
       source ~/.zsh-custom/tmux-autostart.sh
       export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
       export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
@@ -43,4 +44,5 @@
 
   home.file.".p10k.zsh".source = "${config.home.homeDirectory}/dotfiles/zsh/.p10k.zsh";
   home.file.".zsh-custom/tmux-autostart.sh".source = ./scripts/tmux-autostart.sh;
+  home.file.".zsh-custom/run-editor.sh".source = ./scripts/run-editor.sh;
 }
