@@ -34,6 +34,8 @@
 
   programs.hyprlock.enable = true;
 
+  services.hypridle.enable = true;
+
   services.mako.enable = true;
 
   xdg.configFile = {
