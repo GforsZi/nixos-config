@@ -14,6 +14,7 @@
       ../../modules/core/networking.nix
       ../../modules/core/nix-ld.nix
       ../../modules/core/users.nix
+      ../../modules/core/thermald.nix
 
       ../../modules/hardware/audio.nix
       ../../modules/hardware/intel-graphics.nix
