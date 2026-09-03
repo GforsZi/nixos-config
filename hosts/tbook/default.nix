@@ -14,6 +14,7 @@
       ../../modules/core/networking.nix
       ../../modules/core/nix-ld.nix
       ../../modules/core/users.nix
+      ../../modules/core/power-profiles-daemon.nix
       ../../modules/core/thermald.nix
 
       ../../modules/hardware/audio.nix
@@ -27,7 +28,6 @@
       ../../modules/services/docker.nix
       ../../modules/services/mysql.nix
       ../../modules/services/flatpak.nix
-      ../../modules/services/power-profiles-daemon.nix
     ];
 
 
