@@ -14,8 +14,7 @@
       ../../modules/core/networking.nix
       ../../modules/core/nix-ld.nix
       ../../modules/core/users.nix
-      ../../modules/core/power-profiles-daemon.nix
-      ../../modules/core/thermald.nix
+      ../../modules/core/cpu-settings.nix
 
       ../../modules/hardware/audio.nix
       ../../modules/hardware/intel-graphics.nix
