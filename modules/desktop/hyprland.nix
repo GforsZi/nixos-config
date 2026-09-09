@@ -18,22 +18,12 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "sddm-astronaut-theme";
-    settings = {
-      Theme = {
-        CursorTheme = "Bibata-Modern-Ice";
-        CursorSize = 20;
-      };
-    };
-    extraPackages = with pkgs; [
-      kdePackages.qtmultimedia
-      kdePackages.qtsvg
-      kdePackages.qt5compat
-    ];
+ services.displayManager.ly = {
+  enable = true;
+  settings = {
+    animation = "matrix";
   };
+};
 
   security.pam.services.hyprlock = {};
 

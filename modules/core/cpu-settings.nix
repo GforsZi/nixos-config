@@ -10,12 +10,7 @@
   systemd.services.thermald = {
     unitConfig.ConditionACPower = false;
     serviceConfig.ExecStopPost = pkgs.writeShellScript "reset-rapl" ''
-      for zone in /sys/class/powercap/intel-rapl/intel-rapl:*/; do
-        if [ -f "''${zone}constraint_0_max_power_uw" ]; then
-          max=$(cat "''${zone}constraint_0_max_power_uw")
-          echo "$max" > "''${zone}constraint_0_power_limit_uw" 2>/dev/null || true
-        fi
-      done
+      echo 18000000 > /sys/class/powercap/intel-rapl/intel-rapl:0/constraint_0_power_limit_uw 2>/dev/null || true
     '';
   };
 

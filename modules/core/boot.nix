@@ -14,4 +14,5 @@
     "vm.page-cluster" = 0;
   };
 
+  boot.blacklistedKernelModules = [ "intel_ish_ipc" ];
 }
