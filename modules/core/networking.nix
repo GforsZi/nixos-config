@@ -3,8 +3,16 @@
 {
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-  # networking.networkmanager.dns = "none";
-  # networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.networkmanager.insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+  services.dnscrypt-proxy2 = {
+    enable = true;
+    settings = {
+      server_names = [ "cloudflare" ];
+    };
+  };
+  networking.nameservers = [ "127.0.0.1" ];
+
   time.timeZone = "Asia/Jakarta";
   i18n.defaultLocale = "en_US.UTF-8";
   services.printing.enable = true;
