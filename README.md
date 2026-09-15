@@ -27,9 +27,8 @@ nixos-config/
 │   └── services/                          #   Docker, Flatpak, MySQL, power profiles, SSH
 │
 └── home/                                  # Home Manager (user: gfors)
-    └── profiles/
-        └── tbook.nix                      # Entrypoint → imports home/shared/*
-            └── shared/                    #   Apps, shell, terminal, dev tools, CLI tools, editor
+    ├── profiles/                          #   Entrypoint → imports home/shared/*
+    └── shared/                            #   Apps, shell, terminal, dev tools, CLI tools, editor
 ```
 
 ## Structure Overview
@@ -69,7 +68,6 @@ nixos-config/
 - Home Manager is used as a NixOS module (`useGlobalPkgs = true`, `useUserPackages = true`).
 - `spicetify-nix` is a flake input, passed via `extraSpecialArgs`.
 - `home/profiles/tbook.nix` is the Home Manager entrypoint (not `home/default.nix` — that file does not exist).
-- `modules/desktop/kde-plasma.nix` and `home/shared/apps/vlc.nix` are dead code — files exist but are not imported anywhere.
 - Zsh sources `~/.p10k.zsh` from an external `dotfiles` repo.
 - SSH agent auto-starts; GitHub identity uses `~/.ssh/id_ed25519_github` with `IdentitiesOnly yes`.
 - Both `home.stateVersion` and `system.stateVersion` are `"26.05"` — bump only on first install of a new release.
