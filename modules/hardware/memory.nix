@@ -8,7 +8,7 @@
     priority = -1;
   };
 
-  boot.kernel.sysctl."vm.vfs_cache_pressure" = 150;
+  boot.kernel.sysctl."vm.vfs_cache_pressure" = 60;
 
   services.journald.extraConfig = ''
     SystemMaxUse=50M

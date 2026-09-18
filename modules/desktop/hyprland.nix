@@ -18,12 +18,12 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
- services.displayManager.ly = {
-  enable = true;
-  settings = {
-    animation = "matrix";
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      animation = "matrix";
+    };
   };
-};
 
   security.pam.services.hyprlock = {};
 
