@@ -19,9 +19,16 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, spicetify-nix, ... }@inputs:
   let
-    mkHost = hostname: system: username: homeProfile: nixpkgs.lib.nixosSystem {
+    mkHost = hostname: system: username: homeProfile:
+    let
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs pkgs-unstable; };
       modules = [
         ./hosts/${hostname}
         home-manager.nixosModules.home-manager
@@ -29,14 +36,12 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {
-            inherit spicetify-nix;
-            inherit inputs;
+            inherit inputs spicetify-nix pkgs-unstable;
           };
           home-manager.users.${username} = import homeProfile;
         }
       ];
     };
-
   in
   {
     nixosConfigurations = {

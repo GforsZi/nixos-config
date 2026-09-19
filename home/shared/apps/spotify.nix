@@ -18,5 +18,7 @@ in
       shuffle
       fullAppDisplay
     ];
+
+    spotifyLaunchFlags = "--ozone-platform=wayland --enable-features=UseOzonePlatform --disable-gpu-vsync";
   };
 }
