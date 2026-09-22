@@ -6,13 +6,11 @@
 
   ../shared/apps/spotify.nix
   ../shared/apps/vesktop.nix
-  ../shared/apps/alsa-tools.nix
   ../shared/apps/browsers.nix
-  ../shared/apps/tor-browser.nix
-  ../shared/apps/mpv.nix
   ../shared/apps/obs.nix
   ../shared/apps/gimp.nix
   ../shared/apps/zoom-us.nix
+  ../shared/apps/media-apps.nix
 
   ../shared/shell/tmux.nix
   ../shared/shell/zsh.nix

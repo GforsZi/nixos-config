@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     brave
+    tor-browser
   ];
 
   xdg.configFile."BraveSoftware/Brave-Browser/policies/managed/custom-policy.json".text = builtins.toJSON {
