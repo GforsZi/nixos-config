@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }: {
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    shellWrapperName = "y";
+  };
 
-{
-  home.packages = with pkgs; [
-    yazi
-  ];
+  xdg.configFile = {
+    "yazi".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/yazi/.config/yazi";
+  };
 }
