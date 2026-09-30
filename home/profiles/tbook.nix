@@ -11,6 +11,7 @@
   ../shared/apps/gimp.nix
   ../shared/apps/zoom-us.nix
   ../shared/apps/media-apps.nix
+  ../shared/apps/winbox.nix
 
   ../shared/shell/tmux.nix
   ../shared/shell/zsh.nix
