@@ -12,6 +12,7 @@
   ../shared/apps/zoom-us.nix
   ../shared/apps/media-apps.nix
   ../shared/apps/winbox.nix
+  ../shared/apps/gns3.nix
 
   ../shared/shell/tmux.nix
   ../shared/shell/zsh.nix

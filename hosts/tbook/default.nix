@@ -27,6 +27,7 @@
       ../../modules/services/docker.nix
       ../../modules/services/mysql.nix
       ../../modules/services/flatpak.nix
+      ../../modules/services/gns3.nix
     ];
 
 
